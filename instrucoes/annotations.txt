@@ -1,0 +1,51 @@
+yarn init -y  // iniciar projeto
+
+yarn add express  //express para rodar servidor
+
+yarn  add @types/express -D  //types do express para puxar as tipagens
+
+yarn add typescript -D // 
+
+yarn tsc --init
+
+yarn add ts-node-dev -D // tradutor para excrever import no lugar de require
+
+
+codigo no packege.json:
+"scripts": {
+    "dev":"ts-node-dev src/server.ts"
+},
+
+
+
+using typeOrm
+https://typeorm.io/#/
+
+
+#CREATE MIGRATIONS
+yarn typeorm migration:create -n MigrationName
+
+#executar migrations
+yarn typeorm migration:run  -- Executa o "up" da migration
+#desfazer migrations
+yarn typeorm migration:revert  -- Executa o "up" da migration
+
+
+##Erro ao usar anotations "@"
+para nao dar erro qnd usar as "anotations" com typeScript precisa descomentar as linhas experimentalDecorators e emitDecoratorMetadata do arquivo tsconfig.json
+
+## matar processo rodando na porta desejada
+netstat -ano | findstr :[[3333]]
+===> TCP    0.0.0.0:3333           0.0.0.0:0              LISTENING       >>>>20752<<<<<
+
+kill 20752
+
+
+
+## fluxo das criações:
+criar migration up e revert ===> `Onde fica o fluxo de criação e deleção da tabela no banco`
+criar entity ===> `Representação em js da tabela do banco`
+criar repository ===> `vincula a entity com as funções padrões como create, save, fineOne, etc`
+criar service ===> `onde executa as funcoes baseado nas regras de negócio`
+criar controller ===> `pega as informações enviadas pelo usuario e tenta executar a service`
+criar rota ===> `"porta" por onde o usuário acessa as funcionalidades`
